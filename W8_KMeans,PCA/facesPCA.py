@@ -18,7 +18,7 @@ def visualize(im_ar):
 	w_h = int(math.sqrt(im_ar.shape[1]))
 	for i in range(25):
 		plt.subplot(5, 5, i+1)
-		plt.imshow(im_ar[i].reshape(w_h, w_h), cmap="gray")
+		plt.imshow(im_ar[i].reshape(w_h, w_h).T, cmap="gray")
 		plt.axis('off')
 	plt.show()
 
