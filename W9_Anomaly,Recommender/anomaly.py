@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import featureNormalization as fn
 import obtainThreshold as ot
 
-data = loadmat("ex8data1.mat")
+#data = loadmat("ex8data1.mat") # 6 Anomalies
+data = loadmat("ex8data2.mat") # 117 anomalies
 X = data['X']
 Xval = data['Xval']
 yval = data['yval']
@@ -35,7 +36,7 @@ def getSeparation(X, PX, thres):
 
 
 if __name__ == '__main__':
-	initVisualizaiton(X)
+	#initVisualizaiton(X)
 
 	mus, stds, XGauss = fn.getGaussian(X)
 	vars = stds**2
@@ -45,12 +46,11 @@ if __name__ == '__main__':
 
 	center = np.where(np.in1d(PX, PX.max()))[0]
 	center = X[center][0]
-	
-	thres, Fscore = ot.getThreshold(Xval, yval, PX.mean())
+	thres, Fscore = ot.getThreshold(Xval, yval, PX.mean(), PX.mean()/100)
 	normal, anomalies = getSeparation(X, PX, thres)
-	print('thres:', thres, 'Fscore:', Fscore)
+	print('thres:', thres, 'Fscore:', Fscore, 'Anomalies:', anomalies.shape[0])
 
-	finalVisualization(normal, anomalies, center)
+	#finalVisualization(normal, anomalies, center)
 
 
 

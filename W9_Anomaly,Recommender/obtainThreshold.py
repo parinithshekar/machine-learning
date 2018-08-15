@@ -11,16 +11,16 @@ Xval = data['Xval']
 yval = data['yval']
 '''
 
-def getThreshold(Xval, yval, seed):
+def getThreshold(Xval, yval, seed, step):
 	thres = 0
 	Fscore = 0
-	for i in np.arange(0, seed, 1e-8):
+	for i in np.arange(0, seed, step):
 		Ypred = generateY(Xval, i)
 		Fi = getFscore(yval, Ypred)
 		if(Fi>Fscore):
 			thres=i
 			Fscore = Fi
-	return thres, Fscore
+	return thres, Fscore 
 
 def generateY(Xval, seed):
 	rows = Xval.shape[0]
